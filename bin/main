@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 $LOAD_PATH << 'C:\Users\joao montanholi\Desktop\tic_tac_toe\lib'
+require 'something.rb'
+
 class Board
   def initialize
     
@@ -29,4 +31,3 @@ puts "\n#{player1.name.capitalize} will play as X and #{player2.name.capitalize}
 sleep 1
 puts "\nLet's play!"
 
-require 'something.rb'
