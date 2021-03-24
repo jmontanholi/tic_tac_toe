@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+$LOAD_PATH << 'C:\Users\joao montanholi\Desktop\tic_tac_toe\lib'
 class Board
   def initialize
     
@@ -27,3 +28,5 @@ player2 = Player.new(gets.chomp)
 puts "\n#{player1.name.capitalize} will play as X and #{player2.name.capitalize} will play as O"
 sleep 1
 puts "\nLet's play!"
+
+require 'something.rb'
