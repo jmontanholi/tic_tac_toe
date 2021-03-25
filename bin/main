@@ -18,9 +18,21 @@ end
 puts greeting
 
 puts 'Please enter Player 1 name'
-player1 = Player.new(gets.chomp)
+name1 = gets.chomp.to_s
+until name1.match(/\w{1,10}/)
+  puts "Enter a valid name"
+  name1 = gets.chomp.to_s
+end
+player1 = Player.new(name1)
+
 puts "\nPlease enter Player 2 name"
-player2 = Player.new(gets.chomp)
+name2 = gets.chomp.to_s
+until name2.match(/\w{1,10}/)
+  puts "Enter a valid name"
+  name2 = gets.chomp.to_s
+end
+player2 = Player.new(name2) 
+
 puts "\n#{player1.name.capitalize} will play as X and #{player2.name.capitalize} will play as O"
 sleep 1
 puts "\nLet's play!"
@@ -43,24 +55,16 @@ end
 # winner = false
 tie = false
 
-def player1_turn(arr, name, remaining_slots)
+def player_turn(arr, name, symbol, remaining_slots)
   puts "#{name} is your turn to play, choose one of the remaining slots #{remaining_slots}"
   choice = gets.chomp.to_i
-  arr.map! do |item|
-    if item == choice
-      arr[arr.index(item)] = 'X'
-    else
-      item
-    end
+  until remaining_slots.include?(choice)
+    puts "Enter a valid number"
+    choice = gets.chomp.to_i
   end
-end
-
-def player2_turn(arr, name, remaining_slots)
-  puts "#{name} is your turn to play, choose one of the remaining slots #{remaining_slots}"
-  choice = gets.chomp.to_i
   arr.map! do |item|
     if item == choice
-      arr[arr.index(item)] = 'O'
+      arr[arr.index(item)] = symbol
     else
       item
     end
@@ -72,7 +76,7 @@ until tie
 
   remaining_slots = slots.select { |item| item.is_a? Integer }
 
-  player1_turn(slots, player1.name, remaining_slots)
+  player_turn(slots, player1.name,"X", remaining_slots)
   sleep 1
   if slots.none? { |item| item.is_a? Integer }
     puts "It's a Tie!!"
@@ -84,7 +88,7 @@ until tie
 
   design_board(slots)
 
-  player2_turn(slots, player2.name, remaining_slots)
+  player_turn(slots, player2.name, "O", remaining_slots)
   # check if winner
   remaining_slots = slots.select { |item| item.is_a? Integer }
   sleep 1
