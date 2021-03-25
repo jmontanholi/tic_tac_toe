@@ -27,8 +27,8 @@ end
 
 def check_win(player_arr, winning_array)
   control = false
-  winning_array.each do |array|
-    control = true if array.all? { |num| player_arr.include?(num)  }
+  for array in winning_array do
+    control = true if array.all? { |num| player_arr.include?(num) }
   end
-  return control
+  control
 end
