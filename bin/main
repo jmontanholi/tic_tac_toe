@@ -1,14 +1,6 @@
 #!/usr/bin/env ruby
 require_relative '../lib/game_logic'
 
-
-
-def greeting
-  puts 'TIC TAC TOE GAME'
-  puts 'TO START PRESS ENTER'
-  gets.chomp
-end
-
 puts greeting
 
 puts 'Please enter Player 1 name'
