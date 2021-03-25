@@ -1,15 +1,25 @@
 #!/usr/bin/env ruby
-$LOAD_PATH << 'C:\Users\joao montanholi\Desktop\tic_tac_toe\lib'
-require 'something.rb'
 
-class Board
-  def initialize
-    
+require_relative '../lib/game_logic.rb'
+
+module Game
+  arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  def board
+    puts "+---+---+---+"
+    puts "| #{arr[0]} | 2 | 3 |"
+    puts "+---+---+---+"
+    puts "| 4 | 5 | 6 |"
+    puts "+---+---+---+"
+    puts "| 7 | 8 | 9 |"
+    puts "+---+---+---+"
   end
 end
 
+
+
 class Player
   attr_accessor :name
+
   def initialize(name)
     @name = name
   end
@@ -24,10 +34,37 @@ end
 puts greeting
 
 puts 'Please enter Player 1 name'
-player1 = Player.new(gets.chomp)
+$player1 = Player.new(gets.chomp)
 puts "\nPlease enter Player 2 name"
-player2 = Player.new(gets.chomp)
-puts "\n#{player1.name.capitalize} will play as X and #{player2.name.capitalize} will play as O"
+$player2 = Player.new(gets.chomp)
+puts "\n#{$player1.name.capitalize} will play as X and #{$player2.name.capitalize} will play as O"
 sleep 1
 puts "\nLet's play!"
 
+
+def turns
+  winner = false
+  tie = false
+  
+  def player1_turn
+    puts " is your turn to play choice one of the remaining slots "
+    puts gets.chomp
+  end
+  def player2_turn
+    puts " is your turn to play choice one of the remaining slots"
+    puts gets.chomp
+  end
+
+  until tie
+    player1_turn #check if winner
+    
+    player2_turn #check if winner
+
+    #check if tie
+    remaing_slots = arr.each { |item| item.is_a? Integer}
+  end
+  
+end
+
+Game.board
+turns
