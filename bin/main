@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require_relative '../lib/game_logic.rb'
+require_relative '../lib/game_logic'
 
 class Player
   attr_accessor :name
@@ -17,78 +17,80 @@ end
 
 puts greeting
 
-def board
-  puts 'Please enter Player 1 name'
-  player1 = Player.new(gets.chomp)
-  puts "\nPlease enter Player 2 name"
-  player2 = Player.new(gets.chomp)
-  puts "\n#{player1.name.capitalize} will play as X and #{player2.name.capitalize} will play as O"
-  sleep 1
-  puts "\nLet's play!"
+puts 'Please enter Player 1 name'
+player1 = Player.new(gets.chomp)
+puts "\nPlease enter Player 2 name"
+player2 = Player.new(gets.chomp)
+puts "\n#{player1.name.capitalize} will play as X and #{player2.name.capitalize} will play as O"
+sleep 1
+puts "\nLet's play!"
 
-  slots = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+slots = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-  def design_board(slots)
-    system ('clear')
-    system ('cls')
-    
-    puts "+---+---+---+"
-    puts "| #{slots[0]} | #{slots[1]} | #{slots[2]} |"
-    puts "+---+---+---+"
-    puts "| #{slots[3]} | #{slots[4]} | #{slots[5]} |"
-    puts "+---+---+---+"
-    puts "| #{slots[6]} | #{slots[7]} | #{slots[8]} |"
-    puts "+---+---+---+"
-  end
+def design_board(slots)
+  system('clear')
+  system('cls')
 
-  winner = false
-  tie = false
+  puts '+---+---+---+'
+  puts "| #{slots[0]} | #{slots[1]} | #{slots[2]} |"
+  puts '+---+---+---+'
+  puts "| #{slots[3]} | #{slots[4]} | #{slots[5]} |"
+  puts '+---+---+---+'
+  puts "| #{slots[6]} | #{slots[7]} | #{slots[8]} |"
+  puts '+---+---+---+'
+end
 
-  def player1_turn(arr, name, remaining_slots)
-    puts "#{name} is your turn to play, choose one of the remaining slots #{remaining_slots}"
-    choice = gets.chomp.to_i
-    arr.map! do |item| 
-      if item == choice 
-        arr[arr.index(item)] = "X"
-      else
-        item
-      end
+# winner = false
+tie = false
+
+def player1_turn(arr, name, remaining_slots)
+  puts "#{name} is your turn to play, choose one of the remaining slots #{remaining_slots}"
+  choice = gets.chomp.to_i
+  arr.map! do |item|
+    if item == choice
+      arr[arr.index(item)] = 'X'
+    else
+      item
     end
-  end
-
-  def player2_turn(arr, name, remaining_slots)
-    puts "#{name} is your turn to play, choose one of the remaining slots #{remaining_slots}"
-    choice = gets.chomp.to_i
-    arr.map! do |item| 
-      if item == choice 
-        arr[arr.index(item)] = "O"
-      else
-        item
-      end
-    end
-  end
-  
-
-  until tie
-    design_board(slots)
-
-    remaining_slots = slots.select { |item| item.is_a? Integer} 
-
-    player1_turn(slots, player1.name, remaining_slots) 
-    sleep 1
-    return (puts "It's a Tie!!") if slots.none? { |item| item.is_a? Integer }
-    #check if winner
-    remaining_slots = slots.select { |item| item.is_a? Integer} 
-
-    design_board(slots)
-
-    player2_turn(slots, player2.name, remaining_slots) 
-    #check if winner
-    remaining_slots = slots.select { |item| item.is_a? Integer} 
-    sleep 1
-    return (puts "It's a Tie!!") if slots.none? { |item| item.is_a? Integer }
   end
 end
 
-board
+def player2_turn(arr, name, remaining_slots)
+  puts "#{name} is your turn to play, choose one of the remaining slots #{remaining_slots}"
+  choice = gets.chomp.to_i
+  arr.map! do |item|
+    if item == choice
+      arr[arr.index(item)] = 'O'
+    else
+      item
+    end
+  end
+end
 
+until tie
+  design_board(slots)
+
+  remaining_slots = slots.select { |item| item.is_a? Integer }
+
+  player1_turn(slots, player1.name, remaining_slots)
+  sleep 1
+  if slots.none? { |item| item.is_a? Integer }
+    puts "It's a Tie!!"
+    break
+  end
+
+  # check if winner
+  remaining_slots = slots.select { |item| item.is_a? Integer }
+
+  design_board(slots)
+
+  player2_turn(slots, player2.name, remaining_slots)
+  # check if winner
+  remaining_slots = slots.select { |item| item.is_a? Integer }
+  sleep 1
+
+  if slots.none? { |item| item.is_a? Integer }
+    puts "It's a Tie!!"
+    break
+  end
+end
