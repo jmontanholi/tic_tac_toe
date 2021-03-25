@@ -1,13 +1,7 @@
 #!/usr/bin/env ruby
 require_relative '../lib/game_logic'
 
-class Player
-  attr_accessor :name
 
-  def initialize(name)
-    @name = name
-  end
-end
 
 def greeting
   puts 'TIC TAC TOE GAME'
