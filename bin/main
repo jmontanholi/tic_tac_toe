@@ -88,7 +88,7 @@ class Game
       sleep 1
 
       break if winner(@player1, player1_arr, winning_numbers)
-
+      Board.design_board(slots)
       break if tie(slots)
 
       remaining_slots = slots.select { |item| item.is_a? Integer }
@@ -101,7 +101,7 @@ class Game
       sleep 1
 
       break if winner(@player2, player2_arr, winning_numbers)
-
+      Board.design_board(slots)
       break if tie(slots)
     end
   end
