@@ -19,7 +19,6 @@ class Game
     @player1 = player1
     @player2 = player2
   end
-
   def winner(player, player_arr, winning_numbers)
     puts "#{player.name.capitalize} wins"
     true if check_win(player_arr, winning_numbers)
