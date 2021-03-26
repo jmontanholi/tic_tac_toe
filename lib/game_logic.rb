@@ -19,6 +19,7 @@ class Game
     @player1 = player1
     @player2 = player2
   end
+
   def winner(player, player_arr, winning_numbers)
     puts "#{player.name.capitalize} wins"
     true if check_win(player_arr, winning_numbers)
@@ -41,19 +42,22 @@ class Game
       sleep 1
       # Check If player 1 wins with his move.
       break if winner(@player1, player1_arr, winning_numbers)
+
       # Clear board so winner message does not stay in the screen in a tie.
       Board.design_board(slots)
       # Check if it is a tie.
       break if tie(slots)
+
       # Redefine remaining_slots to give players their real options.
       remaining_slots = slots.select { |item| item.is_a? Integer }
       # Clear board so tie message does not stick in the screen.
       Board.design_board(slots)
-      #Player 2 turn.
+      # Player 2 turn.
       player_turn(slots, @player2.name, 'O', remaining_slots, player2_arr)
       sleep 1
       # Check If player 2 wins with his move.
       break if winner(@player2, player2_arr, winning_numbers)
+
       # Clear board so winner message does not stay in the screen in a tie.
       Board.design_board(slots)
       # Check if it is a tie
