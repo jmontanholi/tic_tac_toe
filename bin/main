@@ -88,6 +88,7 @@ class Game
       sleep 1
 
       break if winner(@player1, player1_arr, winning_numbers)
+
       Board.design_board(slots)
       break if tie(slots)
 
@@ -101,6 +102,7 @@ class Game
       sleep 1
 
       break if winner(@player2, player2_arr, winning_numbers)
+
       Board.design_board(slots)
       break if tie(slots)
     end
