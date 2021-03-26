@@ -61,51 +61,18 @@ def player_turn(arr, name, symbol, remaining_slots, player_arr)
   end
 end
 
-class Game
-  def initialize(player1, player2)
-    @player1 = player1
-    @player2 = player2
-  end
+class Board
+  def self.design_board(slots)
+    system('clear')
+    system('cls')
 
-  def winner(player, player_arr, winning_numbers)
-    puts "#{player.name.capitalize} wins"
-    true if check_win(player_arr, winning_numbers)
-  end
-
-  def tie(slots)
-    puts "It's a Tie!!"
-    return true if slots.none? { |item| item.is_a? Integer }
-  end
-
-  def start_game(slots, player1_arr, player2_arr, winning_numbers)
-    tie = false
-    until tie
-      Board.design_board(slots)
-
-      remaining_slots = slots.select { |item| item.is_a? Integer }
-
-      player_turn(slots, @player1.name, 'X', remaining_slots, player1_arr)
-      sleep 1
-
-      break if winner(@player1, player1_arr, winning_numbers)
-
-      Board.design_board(slots)
-      break if tie(slots)
-
-      remaining_slots = slots.select { |item| item.is_a? Integer }
-
-      Board.design_board(slots)
-
-      player_turn(slots, @player2.name, 'O', remaining_slots, player2_arr)
-
-      remaining_slots = slots.select { |item| item.is_a? Integer }
-      sleep 1
-
-      break if winner(@player2, player2_arr, winning_numbers)
-
-      Board.design_board(slots)
-      break if tie(slots)
-    end
+    puts '+---+---+---+'
+    puts "| #{slots[0]} | #{slots[1]} | #{slots[2]} |"
+    puts '+---+---+---+'
+    puts "| #{slots[3]} | #{slots[4]} | #{slots[5]} |"
+    puts '+---+---+---+'
+    puts "| #{slots[6]} | #{slots[7]} | #{slots[8]} |"
+    puts '+---+---+---+'
   end
 end
 
