@@ -61,19 +61,17 @@ def player_turn(arr, name, symbol, remaining_slots, player_arr)
   end
 end
 
-class Board
-  def self.design_board(slots)
-    system('clear')
-    system('cls')
+def design_board(slots)
+  system('clear')
+  system('cls')
 
-    puts '+---+---+---+'
-    puts "| #{slots[0]} | #{slots[1]} | #{slots[2]} |"
-    puts '+---+---+---+'
-    puts "| #{slots[3]} | #{slots[4]} | #{slots[5]} |"
-    puts '+---+---+---+'
-    puts "| #{slots[6]} | #{slots[7]} | #{slots[8]} |"
-    puts '+---+---+---+'
-  end
+  puts '+---+---+---+'
+  puts "| #{slots[0]} | #{slots[1]} | #{slots[2]} |"
+  puts '+---+---+---+'
+  puts "| #{slots[3]} | #{slots[4]} | #{slots[5]} |"
+  puts '+---+---+---+'
+  puts "| #{slots[6]} | #{slots[7]} | #{slots[8]} |"
+  puts '+---+---+---+'
 end
 
 new_game = Game.new(player1, player2)
