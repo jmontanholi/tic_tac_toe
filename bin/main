@@ -1,6 +1,12 @@
 #!/usr/bin/env ruby
 require_relative '../lib/game_logic'
 
+def greeting
+  puts 'TIC TAC TOE GAME'
+  puts 'TO START PRESS ENTER'
+  gets.chomp
+end
+
 puts greeting
 
 puts 'Please enter Player 1 name'
@@ -37,7 +43,6 @@ winning_numbers = [
   [3, 6, 9]
 ]
 puts check_win(player1_arr, winning_numbers)
-tie = false
 
 def player_turn(arr, name, symbol, remaining_slots, player_arr)
   puts "#{name.capitalize} is your turn to play, choose one of the remaining slots #{remaining_slots}"
@@ -56,40 +61,18 @@ def player_turn(arr, name, symbol, remaining_slots, player_arr)
   end
 end
 
-until tie
-  design_board(slots)
+def design_board(slots)
+  system('clear')
+  system('cls')
 
-  remaining_slots = slots.select { |item| item.is_a? Integer }
-
-  player_turn(slots, player1.name, 'X', remaining_slots, player1_arr)
-  sleep 1
-
-  if check_win(player1_arr, winning_numbers)
-    puts "#{player1.name.capitalize} wins"
-    break
-  end
-
-  if slots.none? { |item| item.is_a? Integer }
-    puts "It's a Tie!!"
-    break
-  end
-
-  remaining_slots = slots.select { |item| item.is_a? Integer }
-
-  design_board(slots)
-
-  player_turn(slots, player2.name, 'O', remaining_slots, player2_arr)
-
-  remaining_slots = slots.select { |item| item.is_a? Integer }
-  sleep 1
-
-  if check_win(player2_arr, winning_numbers)
-    puts "#{player2.name.capitalize} wins"
-    break
-  end
-
-  if slots.none? { |item| item.is_a? Integer }
-    puts "It's a Tie!!"
-    break
-  end
+  puts '+---+---+---+'
+  puts "| #{slots[0]} | #{slots[1]} | #{slots[2]} |"
+  puts '+---+---+---+'
+  puts "| #{slots[3]} | #{slots[4]} | #{slots[5]} |"
+  puts '+---+---+---+'
+  puts "| #{slots[6]} | #{slots[7]} | #{slots[8]} |"
+  puts '+---+---+---+'
 end
+
+new_game = Game.new(player1, player2)
+new_game.start_game(slots, player1_arr, player2_arr, winning_numbers)
